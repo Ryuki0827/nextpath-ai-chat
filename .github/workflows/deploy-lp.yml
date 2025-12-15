@@ -1,4 +1,4 @@
-name: Deploy nextpath-lp to Firebase Hosting
+name: Deploy nextpath-lp (public-lp) to Firebase Hosting
 
 on:
   push:
@@ -8,14 +8,28 @@ on:
 jobs:
   deploy_lp:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Firebase CLI
-        run: npm install -g firebase-tools
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
-      - name: Deploy LP to Firebase Hosting
-        run: firebase deploy --only hosting --project nextpath-lp --config firebase_lp.json
+      - name: Install Firebase CLI
+        run: npm i -g firebase-tools
+
+      - name: Restore service account key
+        run: |
+          echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_NEXTPATH_LP_B64 }}" | base64 --decode > $HOME/firebase-sa.json
+          ls -la $HOME/firebase-sa.json
+          head -c 30 $HOME/firebase-sa.json
+
+      - name: Debug auth (whoami)
         env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN_NEXTPATH_LP }}
+          GOOGLE_APPLICATION_CREDENTIALS: $HOME/firebase-sa.json
+        run: firebase --non-interactive projects:list
+
+      - name: Deploy to Firebase Hosting
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: $HOME/firebase-sa.json
+        run: firebase deploy --only hosting --project nextpath-lp --config firebase_lp.json --non-interactive --debug
