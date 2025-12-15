@@ -1,4 +1,4 @@
-name: Deploy nextpath-ai-chat (public-chat) to Firebase Hosting
+name: Deploy NextPath (chat + lp) to Firebase Hosting
 
 on:
   push:
@@ -18,3 +18,16 @@ jobs:
           projectId: nextpath-ai-chat
           channelId: live
           entryPoint: public-chat
+
+  deploy_lp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_NEXTPATH_LP }}
+          projectId: nextpath-lp
+          channelId: live
+          entryPoint: public-lp
