@@ -1,0 +1,12 @@
+{
+  "hosting": {
+    "site": "nextpath-lp",
+    "public": "public-lp",
+    "ignore": [
+      "firebase.json",
+      "firebase.*.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
