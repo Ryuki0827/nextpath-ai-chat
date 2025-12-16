@@ -1,0 +1,13 @@
+{
+  "projects": {
+    "default": "nextpath-ai-chat"
+  },
+  "targets": {
+    "nextpath-ai-chat": {
+      "hosting": {
+        "lp": ["nextpath-lp"],
+        "chat": ["nextpath-ai-chat"]
+      }
+    }
+  }
+}

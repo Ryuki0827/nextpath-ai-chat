@@ -1,0 +1,14 @@
+{
+  "hosting": [
+    {
+      "target": "lp",
+      "public": "public-lp",
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
+    },
+    {
+      "target": "chat",
+      "public": "public-chat",
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>NextPath｜AIキャリア相談チャット</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="icon" href="/favicon.ico">
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">NextPath AIチャット</div>
+      <div class="header-tagline">転職・働き方の悩みを、チャットで気軽に相談</div>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="chat-section">
+      <div class="chat-window" id="chat-window">
+        <div class="message message-bot">
+          <div class="message-meta">AIキャリア相談</div>
+          <div class="message-body">
+            こんにちは。NextPathキャリア相談AIです。<br>
+            いまのご状況やモヤモヤしていることを、話しやすいところから教えてください。
+          </div>
+        </div>
+      </div>
+
+      <form class="chat-form" id="chat-form">
+        <textarea id="user-input" class="chat-input" rows="2" placeholder="例）今の仕事が向いていない気がします…"></textarea>
+        <button type="submit" class="chat-submit">送信</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="./script.js"></script>
+</body>
+</html>
+
+

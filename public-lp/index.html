@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>NextPath|AI×キャリアアドバイザー無料相談</title>
+  <link rel="icon" href="/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AIとキャリアアドバイザーが、転職・働き方の悩みを無料でサポート。LINEから24時間いつでも相談できます。">
+  <style>
+    :root {
+      --primary: #1f4ba7;   /* メイン青 */
+      --primary-dark: #0f2c6a;
+      --accent: #4f7de0;    /* サブアクセント */
+      --bg-light: #f3f6fb;
+      --text-main: #162447;
+      --text-sub: #4a557a;
+      --border-gray: #d8e1f5;
+      --max-width: 1100px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "YuGothic", "Yu Gothic", "Meiryo", sans-serif;
+      color: var(--text-main);
+      background: #fcfaf8;
+      line-height: 1.7;
+    }
+
+    p,
+    ul,
+    ol {
+      margin-bottom: 1.1em;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      background: #fff;
+      border-bottom: 1px solid var(--border-gray);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    header .inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--primary);
+      letter-spacing: 0.02em;
+    }
+
+    .header-tagline {
+      font-size: 12px;
+      color: var(--text-sub);
+      text-align: right;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      border-radius: 999px;
+      font-weight: 700;
+      text-align: center;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.2s ease;
+      font-size: 15px;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 3px 0 var(--primary-dark);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(1px);
+      box-shadow: 0 1px 0 var(--primary-dark);
+    }
+
+    .btn-outline {
+      border: 2px solid var(--primary);
+      color: var(--primary);
+      background: #fff;
+      font-size: 14px;
+      padding: 8px 16px;
+    }
+
+    /* ヒーロー */
+    .hero {
+      background: #fff;
+      border-bottom: 1px solid var(--border-gray);
+    }
+
+    .hero-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 24px 0 32px;
+    }
+
+    .hero-copy {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+
+    .hero-visual {
+      margin-bottom: 16px;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(15, 44, 106, 0.18);
+    }
+
+    .hero-visual img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .hero-title-main {
+      font-size: 30px;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 12px;
+      letter-spacing: 0.01em;
+    }
+
+    .hero-title-sub {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(31, 75, 167, 0.12);
+      color: var(--primary);
+      font-size: 12px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    .hero-points {
+      margin-top: 12px;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    .hero-points li {
+      list-style: none;
+      padding-left: 20px;
+      position: relative;
+      margin-bottom: 4px;
+    }
+
+    .hero-points li::before {
+      content: "✔";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--primary);
+      font-size: 13px;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .hero-note {
+      font-size: 12px;
+      color: var(--text-sub);
+      margin-top: 10px;
+    }
+
+    /* 右側フォーム風カード */
+    .hero-form-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 8px 24px rgba(15, 44, 106, 0.12);
+      border: 1px solid #dbe3f7;
+    }
+
+    .hero-form-title {
+      font-size: 16px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .hero-form-sub {
+      font-size: 12px;
+      text-align: center;
+      margin-bottom: 12px;
+      color: var(--text-sub);
+    }
+
+    .form-row {
+      margin-bottom: 8px;
+      font-size: 13px;
+    }
+
+    .form-row label {
+      display: block;
+      margin-bottom: 2px;
+      font-weight: 600;
+    }
+
+    .form-row input,
+    .form-row select,
+    .form-row textarea {
+      width: 100%;
+      padding: 6px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--border-gray);
+      font-size: 13px;
+    }
+
+    .form-row textarea {
+      resize: vertical;
+      min-height: 50px;
+    }
+
+    .hero-form-footnote {
+      font-size: 11px;
+      color: var(--text-sub);
+      margin-top: 4px;
+      margin-bottom: 8px;
+    }
+
+    .hero-form-btn {
+      width: 100%;
+      margin-top: 4px;
+    }
+
+    .hero-form-btn small {
+      display: block;
+      font-size: 11px;
+      font-weight: 400;
+    }
+
+    /* セクション共通 */
+    section {
+      padding: 44px 0;
+    }
+
+    section .wrap > * + * {
+      margin-top: 18px;
+    }
+
+    section:nth-of-type(even) {
+      background: var(--bg-light);
+    }
+
+    .sec-title {
+      text-align: center;
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .sec-subtitle {
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-sub);
+      margin-bottom: 28px;
+    }
+
+    /* メリットブロック */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .benefit-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid #dfe6fb;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(16, 40, 100, 0.08);
+    }
+
+    .benefit-label {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: var(--primary);
+      color: #fff;
+      font-size: 11px;
+      padding: 3px 10px;
+      border-bottom-right-radius: 10px;
+      font-weight: 700;
+    }
+
+    .benefit-title {
+      font-weight: 700;
+      margin-top: 18px;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+
+    .benefit-text {
+      font-size: 13px;
+      color: var(--text-sub);
+    }
+
+    /* フロー */
+    .flow-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      font-size: 13px;
+    }
+
+    .flow-step {
+      background: #fff;
+      border-radius: 12px;
+      padding: 14px;
+      border: 1px solid #dfe6fb;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 4px 12px rgba(16, 40, 100, 0.08);
+    }
+
+    .flow-step-num {
+      display: inline-block;
+      background: var(--primary);
+      color: #fff;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+
+    .flow-step-title {
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .flow-step-text {
+      color: var(--text-sub);
+      font-size: 12px;
+    }
+
+    /* 実績・イメージ */
+    .highlight-box {
+      background: #fff;
+      border-radius: 12px;
+      padding: 22px;
+      border: 1px solid #d8e2fb;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 18px rgba(16, 40, 100, 0.08);
+    }
+
+    .highlight-num {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .highlight-caption {
+      font-size: 12px;
+      color: var(--text-sub);
+    }
+
+    .salary-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      font-size: 12px;
+    }
+
+    .salary-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px;
+      border: 1px solid #dfe6fb;
+      box-shadow: 0 4px 12px rgba(16, 40, 100, 0.08);
+    }
+
+    .salary-title {
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: var(--primary);
+    }
+
+    .salary-value {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .salary-note {
+      color: var(--text-sub);
+      font-size: 11px;
+    }
+
+    /* 口コミ */
+    .voice-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      font-size: 13px;
+    }
+
+    .voice-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 18px;
+      border: 1px solid #dee5fb;
+      position: relative;
+      box-shadow: 0 4px 12px rgba(16, 40, 100, 0.08);
+    }
+
+    .voice-label {
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: var(--primary);
+    }
+
+    .voice-text {
+      color: var(--text-sub);
+      font-size: 12px;
+    }
+
+    /* ボトムCTA */
+    .bottom-cta {
+      text-align: center;
+      margin-top: 16px;
+    }
+
+    .btn-large {
+      font-size: 18px;
+      padding: 14px 40px;
+      width: 100%;
+    }
+
+    footer {
+      background: #eaf0ff;
+      padding: 16px 0 24px;
+      font-size: 11px;
+      color: var(--text-sub);
+      margin-top: 16px;
+    }
+
+    footer .wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      text-align: center;
+    }
+
+    /* メディアクエリ */
+    @media (min-width: 768px) {
+      .wrap {
+        max-width: var(--max-width);
+        padding: 0 24px;
+      }
+
+      header .inner {
+        flex-direction: row;
+        gap: 0;
+      }
+
+      .hero-copy {
+        padding: 0;
+      }
+
+      .hero-inner {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr;
+        align-items: stretch;
+      }
+
+      .hero-cta-row {
+        flex-direction: row;
+        align-items: center;
+      }
+
+      .btn-large {
+        width: auto;
+      }
+
+      .benefits-grid,
+      .salary-grid,
+      .voice-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .flow-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 1100px) {
+      .benefits-grid,
+      .salary-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .voice-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .flow-grid {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="inner">
+    <div class="logo">NextPath<br>転職サポート</div>
+    <div class="header-tagline">
+      キャリアアドバイザー×AIで<br>転職・働き方の悩みを無料サポート
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ヒーロー -->
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <!-- 左：キャッチ -->
+      <div class="hero-copy">
+        <div class="hero-visual">
+          <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=900&q=80" alt="落ち着いた雰囲気でノートPCに向かう人物" loading="lazy">
+        </div>
+        <div class="hero-badge">完全無料・LINEで完結</div>
+        <h1 class="hero-title-main">「このまま今の仕事でいいの？」を<br>AIと一緒に整理しませんか？</h1>
+        <p class="hero-title-sub">転職すべきか・どんな働き方が合うのかを、<br>AI＋キャリアアドバイザーが一緒に言語化します。</p>
+
+        <ul class="hero-points">
+          <li>24時間いつでもAIに無料相談（匿名スタートOK）</li>
+          <li>3〜5分で「向いてる仕事タイプ」が分かる簡単診断</li>
+          <li>希望者にはキャリアアドバイザーが直接オンライン面談</li>
+        </ul>
+
+        <div class="hero-cta-row">
+          <a href="YOUR_LINE_URL_HERE" class="btn btn-primary btn-large">
+            LINEでAI無料相談をはじめる
+          </a>
+          <a href="#flow" class="btn btn-outline">相談〜転職までの流れを見る</a>
+        </div>
+        <p class="hero-note">※LINE登録だけで料金は一切かかりません。しつこい営業もありません。</p>
+      </div>
+
+      <!-- 右：フォーム風カード（実際は説明用） -->
+      <div class="hero-form-card">
+        <div class="hero-form-title">AIがあなたの状況をヒアリング</div>
+        <div class="hero-form-sub">以下のような質問をLINE上で自動でお伺いします。</div>
+
+        <div class="form-row">
+          <label>現在のご状況</label>
+          <input type="text" placeholder="例）正社員・事務／契約社員・販売など">
+        </div>
+        <div class="form-row">
+          <label>今の仕事でモヤモヤしていること</label>
+          <textarea placeholder="ざっくりでOKです。話したくない項目はスキップ可。"></textarea>
+        </div>
+        <div class="form-row">
+          <label>理想の働き方</label>
+          <input type="text" placeholder="例）在宅多め／残業少なめ／人と関わる仕事がいい…など">
+        </div>
+        <div class="form-row">
+          <label>希望エリア</label>
+          <input type="text" placeholder="例）那須塩原市周辺／栃木県内／関東など">
+        </div>
+        <p class="hero-form-footnote">
+          ※実際の入力はLINEトーク画面で行います。このフォームから送信はできません。
+        </p>
+        <a href="YOUR_LINE_URL_HERE" class="btn btn-primary hero-form-btn">
+          AIに無料相談をはじめる
+          <small>LINE友だち追加して診断スタート</small>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- メリット -->
+  <section>
+    <div class="wrap">
+      <h2 class="sec-title">なぜ「AI×キャリアアドバイザー」がいいの？</h2>
+      <p class="sec-subtitle">AIだけでも、人だけでもなく。両方の良さを組み合わせた“ハイブリッド型”の相談スタイルです。</p>
+
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="benefit-label">メリット1</div>
+          <div class="benefit-title">AIが遠慮なく本音を聞いてくれる</div>
+          <p class="benefit-text">
+            上司や友人には話しづらい本音も、AIなら気軽に打ち明けられます。転職すべきか迷っている段階のモヤモヤも、そのまま言語化して整理してくれます。
+          </p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-label">メリット2</div>
+          <div class="benefit-title">人が「現実的な選択肢」に落とし込む</div>
+          <p class="benefit-text">
+            AIが整理した内容をもとに、キャリアアドバイザーが求人の有無や条件感を踏まえて、現実的な選択肢へと落とし込みます。転職を急がない方には無理に勧めません。
+          </p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-label">メリット3</div>
+          <div class="benefit-title">履歴書・職務経歴書づくりがラクに</div>
+          <p class="benefit-text">
+            AIがあなたの仕事内容・強み・実績をヒアリングし、応募に必要な要素を整理。あとはテンプレートに当てはめていくだけで、書類のたたき台が完成します。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 実績イメージ -->
+  <section>
+    <div class="wrap">
+      <h2 class="sec-title">相談後のイメージ</h2>
+      <p class="sec-subtitle">あくまでイメージですが、こんなキャリアチェンジを目指せます。</p>
+
+      <div class="highlight-box">
+        <p><span class="highlight-num">最短 2週間〜</span>で内定が出たケースも。じっくり相談しながら、自分に合うペースで進めることももちろん可能です。</p>
+        <p class="highlight-caption">※エリア・職種・ご希望条件により期間は前後します。</p>
+      </div>
+
+      <div class="salary-grid">
+        <div class="salary-card">
+          <div class="salary-title">販売職から事務職へ</div>
+          <div class="salary-value">年収 320万円 → 380万円</div>
+          <p class="salary-note">
+            土日休み・残業少なめの一般事務へ。PCスキルに不安があっても、段階に合った求人をご提案します。
+          </p>
+        </div>
+        <div class="salary-card">
+          <div class="salary-title">サービス業から内勤＋在宅へ</div>
+          <div class="salary-value">年収 280万円 → 350万円</div>
+          <p class="salary-note">
+            接客経験を活かして、オンラインサポートやカスタマーサクセス職へ。働き方重視の転職もサポートします。
+          </p>
+        </div>
+        <div class="salary-card">
+          <div class="salary-title">地方×転職で年収キープ</div>
+          <div class="salary-value">年収 400万円 → 400万円</div>
+          <p class="salary-note">
+            都市部から地方へ移住しつつ、年収をできるだけ落とさない転職プランの相談も可能です。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- フロー -->
+  <section id="flow">
+    <div class="wrap">
+      <h2 class="sec-title">ご相談から内定までの流れ</h2>
+      <p class="sec-subtitle">すべてオンラインで完結。無理な転職の押しつけは一切ありません。</p>
+
+      <div class="flow-grid">
+        <div class="flow-step">
+          <div class="flow-step-num">STEP 1</div>
+          <div class="flow-step-title">LINEで友だち追加</div>
+          <p class="flow-step-text">
+            このページのボタンから、NextPath Careerの公式LINEを追加します。匿名での相談スタートもOK。
+          </p>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-num">STEP 2</div>
+          <div class="flow-step-title">AIが状況をヒアリング</div>
+          <p class="flow-step-text">
+            現在の仕事・希望の働き方・不安な点などを、チャット形式でAIが丁寧にお伺いします。
+          </p>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-num">STEP 3</div>
+          <div class="flow-step-title">向いてる方向性を提案</div>
+          <p class="flow-step-text">
+            転職すべきか・どんな職種が合いそうかなど、AIが3パターン前後の方向性を整理してご提案。
+          </p>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-num">STEP 4</div>
+          <div class="flow-step-title">キャリアアドバイザー面談</div>
+          <p class="flow-step-text">
+            希望者のみ、オンラインで個別面談。求人票を見ながら、より具体的な選択肢を一緒に検討します。
+          </p>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-num">STEP 5</div>
+          <div class="flow-step-title">応募・選考・内定</div>
+          <p class="flow-step-text">
+            応募書類の作成サポートや面接対策も対応。内定後の条件交渉や不安の相談もOKです。
+          </p>
+        </div>
+      </div>
+
+      <div class="bottom-cta">
+        <a href="YOUR_LINE_URL_HERE" class="btn btn-primary btn-large">
+          無料でAIキャリア相談をしてみる
+        </a>
+        <p class="hero-note">※「とりあえず話を聞くだけ」も大歓迎です。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 相談者の声 -->
+  <section>
+    <div class="wrap">
+      <h2 class="sec-title">相談された方の声（イメージ）</h2>
+      <p class="sec-subtitle">実際のご相談内容をもとにしたイメージです。今後、許可をいただいた方の声を掲載予定です。</p>
+
+      <div class="voice-grid">
+        <div class="voice-card">
+          <div class="voice-label">31歳・女性／販売職 → 一般事務</div>
+          <p class="voice-text">
+            「転職するか悩んでいた段階でAIに相談できたのが良かったです。自分だけだと“辞めるか・辞めないか”の2択しか見えていませんでしたが、『こういう働き方もあるよ』と整理してもらえて気持ちが楽になりました。」
+          </p>
+        </div>
+        <div class="voice-card">
+          <div class="voice-label">27歳・男性／サービス業 → 在宅多めの内勤</div>
+          <p class="voice-text">
+            「夜遅くの勤務が多くて、転職サイトを見る気力すらなかったのですが、LINEでぽちぽち答えるだけで方向性が出たのが助かりました。最終的な求人紹介は人がしてくれるので、条件の相談もしやすかったです。」
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wボタン -->
+  <section>
+    <div class="wrap">
+      <h2 class="sec-title">まずはAIで本音を整理してみませんか？</h2>
+      <p class="sec-subtitle">「転職するかどうか決めていない」段階からOK。話すのが苦手でも、AIチャットなら自分のペースで相談できます。</p>
+
+      <div class="bottom-cta">
+        <a href="YOUR_LINE_URL_HERE" class="btn btn-primary btn-large" style="margin-bottom:8px;">
+          LINEでAI無料相談をはじめる
+        </a>
+        <br>
+        <a href="mailto:YOUR_EMAIL_HERE" class="btn btn-outline">
+          まずはメールで問い合わせる
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>当サイトでは、ギャンブル・投資勧誘・アダルト・反社会的内容は一切扱いません。転職・キャリア支援に関する健全な情報提供のみを目的としています。</div>
+    <div>運営：NextPath Career（谷口竜気）</div>
+    <div>&copy; <span id="year"></span> NextPath Career All Rights Reserved.</div>
+  </div>
+</footer>
+
+<script>
+  // コピーライト年を自動更新
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
+
